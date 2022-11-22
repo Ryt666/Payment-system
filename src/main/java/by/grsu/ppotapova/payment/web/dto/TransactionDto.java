@@ -1,13 +1,16 @@
-package by.grsu.ppotapova.payment.db.model;
+package by.grsu.ppotapova.payment.web.dto;
 
 import java.sql.Timestamp;
-public class Transaction {
-	
+
+public class TransactionDto {
+
 	private Integer id;
-	
-	private Integer number;
-	
+
+	private Long number;
+
 	private Integer bankAccountId;
+
+	private Long bankAccountNumber;
 	
 	private Integer amount;
 	
@@ -19,31 +22,39 @@ public class Transaction {
 	
 	private String comment;
 
-	@Override
-	public String toString () {
-		return "transaction [ id: " + id + "number" + number +"bank_account:"+bankAccountId +"; amount: "+ amount + "; currency: "+ currency + "type: " + type + "date: " + date +"comment: " + comment + "]";
-	}
 
-		public Integer getId() {
+	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
-	public Integer getNumber() {
-		return number;
-	}
-	public void setNumber(Integer number) {
-		this.number = number;
-	}
-	
+
 	public Integer getBankAccountId() {
 		return bankAccountId;
 	}
-	public void setBankAccountId(Integer bank_account_id) {
-		this.bankAccountId = bank_account_id;
+
+	public void setBankAccountId(Integer bankAccountId) {
+		this.bankAccountId = bankAccountId;
 	}
+
+	public Long getNumber() {
+		return number;
+	}
+
+	public void setNumber(Long number) {
+		this.number = number;
+	}
+
+	public Long getBankAccountNumber() {
+		return bankAccountNumber;
+	}
+
+	public void setBankAccountNumber(Long bankAccountNumber) {
+		this.bankAccountNumber = bankAccountNumber;
+	}
+
 	public Integer getAmount() {
 		return amount;
 	}
@@ -75,4 +86,12 @@ public class Transaction {
 		this.comment = comment;
 	}
 	
+	public Long getbankAccountNumber() {
+		return bankAccountnumber;
+	}
+
+	public void setbankAccountNumber(Long bankAccountnumber) {
+		this.bankAccountnumber = bankAccountnumber;
+	}
+
 }

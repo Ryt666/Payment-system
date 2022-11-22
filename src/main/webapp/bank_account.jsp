@@ -30,7 +30,7 @@
 <div class="row">
 			<div class="col s12">
 				<div class="center-align">
-                   <a class="btn-floating btn-large waves-effect waves-light" href="bank_account_1.jsp"><i class="material-icons">add</i></a>
+                   <a class="btn-floating btn-large waves-effect waves-light" href="add_bank_account.jsp"><i class="material-icons">add</i></a>
 				
 				</div>
 			</div>

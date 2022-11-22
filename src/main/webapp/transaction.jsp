@@ -12,6 +12,7 @@
 			<thead>
 				<tr>
 				    <th>ID</th>
+				    <th>Number</th>
 				    <th>Bank_Account_ID</th>
 					<th>Amount</th>
 					<th>Currency</th>
@@ -33,7 +34,7 @@
 <div class="row">
 			<div class="col s12">
 				<div class="center-align">
-                   <a class="btn-floating btn-large waves-effect waves-light" href="transaction_1.jsp"><i class="material-icons">add</i> 
+                   <a class="btn-floating btn-large waves-effect waves-light" href="add_transaction.jsp"><i class="material-icons">add</i> 
                  
             
                    </a>

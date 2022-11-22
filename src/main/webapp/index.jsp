@@ -65,7 +65,7 @@
 <div class="row">
 			<div class="col s12">
 				<div class="center-align">
-                   <a class="btn-floating btn-large waves-effect waves-light" href="2.jsp"><i class="material-icons">add</i> 
+                   <a class="btn-floating btn-large waves-effect waves-light" href="add_client.jsp"><i class="material-icons">add</i> 
                  
             
                    </a>

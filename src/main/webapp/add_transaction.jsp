@@ -13,6 +13,14 @@
 		<div class="row">
 			
 				<div class="row">
+				<div class="input-field col s12">
+						<input id="Number" type="text" class="validate"> <label
+							for="Number">Number</label>
+					</div>
+				<div class="input-field col s12">
+						<input id="Bank_Account_Id" type="text" class="validate"> <label
+							for="Bank_Account_Id">Bank_Account_Id</label>
+					</div>
 					<div class="input-field col s12">
 						<input id="Name" type="text"
 							class="validate"> <label for="Name">Amount</label>
@@ -44,14 +52,10 @@
 					</div>
 				
 
-<div class="row">
-			<div class="col s12">
-				<div class="center-align">
-                   <a class="btn-floating btn-large waves-effect waves-light" href="credit_card_1.jsp"><i class="material-icons">add</i></a>
-				
-				</div>
+<div class="col s12 input-field center-align">
+				<a class="btn waves-effect waves-light red" href="list.jsp"><i class="material-icons left">List</i></a> <a class="btn waves-effect waves-light green"
+					href="#"><i class="material-icons left">Save</i></a>
 			</div>
-		</div>
 <!-- Compiled and minified JavaScript -->
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>

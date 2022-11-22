@@ -13,9 +13,7 @@
 		<div class="row">
 			
 				<div class="row">
-				<div class="input-field col s12">
-						<input id="ID" type="text" class="validate"> <label
-							for="ID">ID</label>
+				
 					</div>
 					<div class="input-field col s12">
 						<input id="Number" type="text"

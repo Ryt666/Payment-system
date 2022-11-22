@@ -20,28 +20,23 @@
 			<tbody>
 			    <tr>
 				
-					<td>32526352415442214</td>
-					<td>09/25</td>
+					
 				</tr>
 				<tr>
 				    
-					<td>9854756253142217</td>
-					<td>07/23</td>
+					
 			    </tr>
 			    <tr>
 				   
-					<td>5245789652335498</td>
-					<td>01/24</td>
+					
 			    </tr>
 			    <tr>
 				    
-					<td>2547854542199665</td>
-					<td>06/26</td>
+					
 			    </tr>
 			    <tr>
 			
-					<td>4758574868154295</td>
-					<td>03/24</td>
+					
 			    </tr>
 			    
 			
@@ -51,7 +46,7 @@
 <div class="row">
 			<div class="col s12">
 				<div class="center-align">
-                   <a class="btn-floating btn-large waves-effect waves-light" href="credit_card_1.jsp"><i class="material-icons">add</i></a>
+                   <a class="btn-floating btn-large waves-effect waves-light" href="add_credit_card.jsp"><i class="material-icons">add</i></a>
 				
 				</div>
 			</div>

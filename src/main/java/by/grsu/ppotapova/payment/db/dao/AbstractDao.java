@@ -1,10 +1,12 @@
 package by.grsu.ppotapova.payment.db.dao;
 
 import java.io.File;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -44,6 +46,14 @@ public abstract class AbstractDao {
 		return getGeneratedId(c, tableName, "id");
 	}
 
+	public static boolean isDbExist() throws SQLException {
+		try (Connection c = createConnection()) {
+			DatabaseMetaData metaData = c.getMetaData();
+			ResultSet rs = metaData.getTables(null, null, null, null);
+			return rs.next(); // assume DB exists if at least one table presents
+		}
+	}
+	
 	public static void createDbSchema() {
 		System.out.println(String.format("create DB %s", DB_NAME));
 

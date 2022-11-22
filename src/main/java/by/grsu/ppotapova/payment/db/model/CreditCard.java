@@ -6,11 +6,17 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class CreditCard {
+	
 	private int id;
+	
 	private int number;
+	
 	private Timestamp expiryDate;
+	
 	private int clientId;
+	
 	private int bankAccountId;
+	
 	public int getId() {
 		return id;
 	}

@@ -34,7 +34,7 @@
 					</div>
 				</div>
 				
-					</div>
+	    </div>
 					<div class="col s12 input-field center-align">
 				<a class="btn waves-effect waves-light red" href="list.jsp"><i class="material-icons left">List</i></a> <a class="btn waves-effect waves-light green"
 					href="#"><i class="material-icons left">Save</i></a>
