@@ -6,7 +6,7 @@ public class CreditCardDto {
 
     private Integer id;
 	
-	private Long number;
+	private Integer number;
 	
 	private Timestamp expiryDate;
 	
@@ -16,7 +16,7 @@ public class CreditCardDto {
 	
 	private Integer bankAccountId;
 	
-	private String bankAccountName;
+	private Integer bankAccountNumber;
 	
 	public int getId() {
 		return id;
@@ -25,10 +25,10 @@ public class CreditCardDto {
 		this.id = id;
 	}
 	
-	public Long getNumber() {
+	public Integer getNumber() {
 		return number;
 	}
-	public void setNumber(Long number) {
+	public void setNumber(Integer number) {
 		this.number = number;
 	}
 	
@@ -53,17 +53,17 @@ public class CreditCardDto {
 		this.bankAccountId = bankAccountId;
 	}
 	
-	public String getBankAccountName() {
-		return bankAccountName;
+	public Integer getBankAccountNumber() {
+		return bankAccountNumber;
 	}
-	public void setBankAccountName(String bankAccountName) {
-		this.bankAccountName = bankAccountName;
+	public void setBankAccountNumber(Integer bankAccountNumber) {
+		this.bankAccountNumber = bankAccountNumber;
 	}
 	
 	public String getClientName() {
 		return clientName;
 	}
-	public void setClienttName(String clientName) {
+	public void setClientName(String clientName) {
 		this.clientName = clientName;
 	}
 	

@@ -1,6 +1,7 @@
 package by.grsu.ppotapova.payment.web.servlet;
 
 import java.io.IOException;
+
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
@@ -41,7 +42,6 @@ public class TransactionServlet extends HttpServlet {
 		List<TransactionDto> dtos = transactions.stream().map((entity) -> {
 			TransactionDto dto = new TransactionDto();
 			dto.setId(entity.getId());
-			dto.setNumber(entity.getNumber());
 			dto.setAmount(entity.getAmount());
 			dto.setCurrency(entity.getCurrency());
 			dto.setType(entity.getType());
@@ -50,7 +50,7 @@ public class TransactionServlet extends HttpServlet {
 
 
 			BankAccount bankAccount = bankAccountDao.getById(entity.getBankAccountId());
-			dto.setBankAccountNumber(bankAccount.getBankAccountNumber());
+			dto.setBankAccountNumber(bankAccount.getNumber());
 			return dto;
 		}).collect(Collectors.toList());
 
@@ -59,13 +59,12 @@ public class TransactionServlet extends HttpServlet {
 	}
 
 	private void handleEditView(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		String modelIdStr = req.getParameter("id");
+		String transactionIdStr = req.getParameter("id");
 		TransactionDto dto = new TransactionDto();
 		if (!Strings.isNullOrEmpty(transactionIdStr)) {
 			Integer transactionId = Integer.parseInt(transactionIdStr);
-			Transaction entity = transactionDao.getById(transactinId);
+			Transaction entity = transactionDao.getById(transactionId);
 			dto.setId(entity.getId());
-			dto.setNumber(entity.getNumber());
 			dto.setAmount(entity.getAmount());
 			dto.setCurrency(entity.getCurrency());
 			dto.setType(entity.getType());
@@ -81,19 +80,21 @@ public class TransactionServlet extends HttpServlet {
 	@Override
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		System.out.println("doPost");
-		Model model = new Model();
-		String modelIdStr = req.getParameter("id");
-		String brandIdStr = req.getParameter("brandId");
-		model.setName(req.getParameter("name"));
-		model.setActual(Boolean.parseBoolean(req.getParameter("actual")));
-		model.setBrandId(brandIdStr == null ? null : Integer.parseInt(brandIdStr));
-		model.setUpdated(new Timestamp(new Date().getTime()));
-		if (Strings.isNullOrEmpty(modelIdStr)) {
-			model.setCreated(new Timestamp(new Date().getTime()));
-			transactionDao.insert(model);
+		Transaction transaction = new Transaction();
+		String transactionIdStr = req.getParameter("id");
+		String bankAccountIdStr = req.getParameter("bankAccountId");
+		transaction.setAmount(Integer.parseInt(req.getParameter("number")));
+		transaction.setBankAccountId(bankAccountIdStr == null ? null : Integer.parseInt(bankAccountIdStr));
+		transaction.setDate(new Timestamp(new Date().getTime()));
+		transaction.setCurrency(req.getParameter("currency"));
+		transaction.setType(req.getParameter("type"));
+		transaction.setComment(req.getParameter("comment"));
+		if (Strings.isNullOrEmpty(transactionIdStr)) {
+			transaction.setDate(new Timestamp(new Date().getTime()));
+			transactionDao.insert(transaction);
 		} else {
-			model.setId(Integer.parseInt(modelIdStr));
-			transactionDao.update(model);
+			transaction.setId(Integer.parseInt(transactionIdStr));
+			transactionDao.update(transaction);
 		}
 		res.sendRedirect("/model");
 	}

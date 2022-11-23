@@ -46,13 +46,11 @@
 <div class="row">
 			<div class="col s12">
 				<div class="center-align">
-                   <a class="btn-floating btn-large waves-effect waves-light" href="add_credit_card.jsp"><i class="material-icons">add</i></a>
+                   <a class="btn-floating btn-large waves-effect waves-light blue" href="add_credit_card.jsp"><i class="material-icons">add</i></a>
 				
 				</div>
 			</div>
 		</div>
 <!-- Compiled and minified JavaScript -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-	
+
 </t:wrapper>

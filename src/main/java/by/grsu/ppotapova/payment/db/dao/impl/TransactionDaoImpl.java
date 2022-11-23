@@ -22,14 +22,14 @@ public class TransactionDaoImpl extends AbstractDao implements IDao<Integer, Tra
 	public void insert(Transaction entity) {
 		try (Connection c = createConnection()) {
 			PreparedStatement pstmt = c
-					.prepareStatement("insert into _transaction(number, bank_account_id, amount, currency, type, _data, comment) values(?,?,?,?,?,?)");
-			pstmt.setInt(1,entity.getNumber());
-			pstmt.setInt(2,entity.getBankAccountId());
-			pstmt.setInt(3, entity.getAmount());
-			pstmt.setString(4, entity.getCurrency());
-			pstmt.setString(5, entity.getType());
-			pstmt.setTimestamp(6, entity.getDate());
-			pstmt.setString(7,entity.getComment());
+					.prepareStatement("insert into _transaction( bank_account_id, amount, currency, type, _data, comment) values(?,?,?,?,?,?)");
+		
+			pstmt.setInt(1,entity.getBankAccountId());
+			pstmt.setInt(2, entity.getAmount());
+			pstmt.setString(3, entity.getCurrency());
+			pstmt.setString(4, entity.getType());
+			pstmt.setTimestamp(5, entity.getDate());
+			pstmt.setString(6,entity.getComment());
 			pstmt.executeUpdate();
 			entity.setId(getGeneratedId(c, "_transaction"));
 		} catch (SQLException e) {
@@ -41,14 +41,14 @@ public class TransactionDaoImpl extends AbstractDao implements IDao<Integer, Tra
 	@Override
 	public void update(Transaction entity) {
 		try (Connection c = createConnection()) {
-			PreparedStatement pstmt = c.prepareStatement("update _transaction set number=?, bank_account_id=?, amount=?, currency=?, type=?, _data=?, comment=? where id=?");
-			pstmt.setInt(1,entity.getNumber());
-			pstmt.setInt(2,entity.getBankAccountId());
-			pstmt.setInt(3, entity.getAmount());
-			pstmt.setString(4, entity.getCurrency());
-			pstmt.setString(5, entity.getType());
-			pstmt.setTimestamp(6, entity.getDate());
-			pstmt.setString(7,entity.getComment());
+			PreparedStatement pstmt = c.prepareStatement("update _transaction set bank_account_id=?, amount=?, currency=?, type=?, _data=?, comment=? where id=?");
+			
+			pstmt.setInt(1,entity.getBankAccountId());
+			pstmt.setInt(2, entity.getAmount());
+			pstmt.setString(3, entity.getCurrency());
+			pstmt.setString(4, entity.getType());
+			pstmt.setTimestamp(5, entity.getDate());
+			pstmt.setString(6,entity.getComment());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new RuntimeException("can't update Transaction entity", e);
@@ -105,7 +105,6 @@ public class TransactionDaoImpl extends AbstractDao implements IDao<Integer, Tra
 	private Transaction rowToEntity(ResultSet rs) throws SQLException {
 		Transaction entity = new Transaction();
 		entity.setId(rs.getInt("id"));
-		entity.setNumber(rs.getInt("number"));
 		entity.setBankAccountId(rs.getInt("bank_account_id"));
 		entity.setAmount(rs.getInt("amount"));
 		entity.setCurrency(rs.getString("currency"));

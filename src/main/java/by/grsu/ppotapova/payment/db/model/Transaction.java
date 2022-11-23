@@ -5,8 +5,6 @@ public class Transaction {
 	
 	private Integer id;
 	
-	private Integer number;
-	
 	private Integer bankAccountId;
 	
 	private Integer amount;
@@ -21,7 +19,7 @@ public class Transaction {
 
 	@Override
 	public String toString () {
-		return "transaction [ id: " + id + "number" + number +"bank_account:"+bankAccountId +"; amount: "+ amount + "; currency: "+ currency + "type: " + type + "date: " + date +"comment: " + comment + "]";
+		return "transaction [ id: " + id  +"bank_account:"+bankAccountId +"; amount: "+ amount + "; currency: "+ currency + "type: " + type + "date: " + date +"comment: " + comment + "]";
 	}
 
 		public Integer getId() {
@@ -30,13 +28,7 @@ public class Transaction {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
-	public Integer getNumber() {
-		return number;
-	}
-	public void setNumber(Integer number) {
-		this.number = number;
-	}
+
 	
 	public Integer getBankAccountId() {
 		return bankAccountId;
@@ -44,30 +36,35 @@ public class Transaction {
 	public void setBankAccountId(Integer bank_account_id) {
 		this.bankAccountId = bank_account_id;
 	}
+	
 	public Integer getAmount() {
 		return amount;
 	}
 	public void setAmount(Integer amount) {
 		this.amount = amount;
 	}
+	
 	public String getCurrency() {
 		return currency;
 	}
 	public void setCurrency(String currency) {
 		this.currency = currency;
 	}
+	
 	public String getType() {
 		return type;
 	}
 	public void setType(String type) {
 		this.type = type;
 	}
+	
 	public Timestamp getDate() {
 		return date;
 	}
 	public void setDate(Timestamp date) {
 		this.date = date;
 	}
+	
 	public String getComment() {
 		return comment;
 	}

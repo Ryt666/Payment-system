@@ -9,7 +9,7 @@ public class CreditCard {
 	
 	private int id;
 	
-	private int number;
+	private Integer number;
 	
 	private Timestamp expiryDate;
 	
@@ -23,10 +23,10 @@ public class CreditCard {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getNumber() {
+	public Integer getNumber() {
 		return number;
 	}
-	public void setNumber(int number) {
+	public void setNumber(Integer number) {
 		this.number = number;
 	}
 	public Timestamp getExpiryDate() {

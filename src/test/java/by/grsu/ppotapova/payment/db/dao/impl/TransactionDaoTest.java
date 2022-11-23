@@ -17,7 +17,7 @@ public class TransactionDaoTest extends AbstractTest {
 	@Test
 	public void testInsert() {
 		Transaction entity = new Transaction();
-		entity.setNumber(12);
+		
 		entity.setBankAccountId(saveBankAccount(1).getId());
 		entity.setAmount(12345);
 		entity.setCurrency("$");
@@ -33,7 +33,7 @@ public class TransactionDaoTest extends AbstractTest {
 	public void testUpdate() {
 		
 		Transaction entity = new Transaction();
-		entity.setNumber(12);
+		
 		entity.setBankAccountId(saveBankAccount(1).getId());
 		entity.setAmount(12345);
 		entity.setCurrency("$");
@@ -55,7 +55,7 @@ public class TransactionDaoTest extends AbstractTest {
 	@Test
 	public void testDelete() {
 		Transaction entity = new Transaction();
-		entity.setNumber(12);
+		
 		entity.setBankAccountId(saveBankAccount(1).getId());
 		entity.setAmount(12345);
 		entity.setCurrency("$");
@@ -72,7 +72,7 @@ public class TransactionDaoTest extends AbstractTest {
 	@Test
 	public void testGetById() {
 		Transaction entity = new Transaction();
-		entity.setNumber(12);
+		
 		entity.setBankAccountId(saveBankAccount(1).getId());
 		entity.setAmount(12345);
 		entity.setCurrency("$");
@@ -98,7 +98,6 @@ public class TransactionDaoTest extends AbstractTest {
 		int expectedCount = getRandomNumber(1, 5);
 		for (int i = 1; i <= expectedCount; i = i + 1) {
 			Transaction entity = new Transaction();
-			entity.setNumber(12);
 			entity.setBankAccountId(saveBankAccount(1 + i).getId());
 			entity.setAmount(12345);
 			entity.setCurrency("$");

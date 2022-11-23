@@ -6,11 +6,9 @@ public class TransactionDto {
 
 	private Integer id;
 
-	private Long number;
-
 	private Integer bankAccountId;
 
-	private Long bankAccountNumber;
+	private Integer bankAccountNumber;
 	
 	private Integer amount;
 	
@@ -39,19 +37,11 @@ public class TransactionDto {
 		this.bankAccountId = bankAccountId;
 	}
 
-	public Long getNumber() {
-		return number;
-	}
-
-	public void setNumber(Long number) {
-		this.number = number;
-	}
-
-	public Long getBankAccountNumber() {
+	public Integer getBankAccountNumber() {
 		return bankAccountNumber;
 	}
 
-	public void setBankAccountNumber(Long bankAccountNumber) {
+	public void setBankAccountNumber(Integer bankAccountNumber) {
 		this.bankAccountNumber = bankAccountNumber;
 	}
 
@@ -86,12 +76,5 @@ public class TransactionDto {
 		this.comment = comment;
 	}
 	
-	public Long getbankAccountNumber() {
-		return bankAccountnumber;
-	}
-
-	public void setbankAccountNumber(Long bankAccountnumber) {
-		this.bankAccountnumber = bankAccountnumber;
-	}
 
 }

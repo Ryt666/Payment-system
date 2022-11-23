@@ -24,10 +24,10 @@
 		<servlet-class>by.grsu.ppotapova.payment.web.servlet.TransactionServlet</servlet-class>
 	</servlet>
 	
-	<!--servlet>
+	<servlet>
 	<servlet-name>CreditCardServlet</servlet-name>
 	<servlet-class>by.grsu.ppotapova.payment.web.servlet.CreditCardServlet</servlet-class>
-</servlet-->
+</servlet>
 
 
 	<servlet-mapping>
@@ -45,9 +45,9 @@
 		<url-pattern>/transaction</url-pattern>
 	</servlet-mapping>
 	
-	<!--servlet-mapping>
+	<servlet-mapping>
 	    <servlet-name>CreditCardServlet</servlet-name>
 	    <url-pattern>/creditCard</url-pattern>
-</servlet-mapping-->
+</servlet-mapping>
 	
 </web-app>

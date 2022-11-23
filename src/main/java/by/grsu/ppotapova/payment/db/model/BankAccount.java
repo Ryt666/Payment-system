@@ -1,8 +1,11 @@
 package by.grsu.ppotapova.payment.db.model;
 
 public class BankAccount {
+	
 	private int id;
+	
 	private int number;
+	
 	private boolean blocked;
 	@Override
 	public String toString () {
