@@ -1,47 +1,48 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
-<c:set var="pageTitle" value="Add Credit Card list" scope="application" />
+<c:set var="pageTitle" value="Credit card edit" scope="application" />
 <t:wrapper>
-<title>Add Credit Card</title>
-
-<!-- Compiled and minified CSS -->
-
-		<h1>Add Credit Card</h1>
-
-
+	<c:choose>
+		<c:when test="${empty dto.id}">
+			<h1>Create credit card</h1>
+		</c:when>
+		<c:otherwise>
+			<h1>Edit credit card #${dto.id}</h1>
+		</c:otherwise>
+	</c:choose>
+	<form class="col s12" method="post" action="/credit_card">
 		<div class="row">
-			
-				<div class="row">
-				
-					</div>
-					<div class="input-field col s12">
-						<input id="Number" type="text"
-							class="validate"> <label for="Number">Number</label>
-					</div>
-					<div class="input-field col s12:">
-						<input id="expiry_date" type="text" class="validate"> <label
-							for="expiry_date">Expiry_Date</label>
-					</div>
-					<div class="input-field col s12">
-						<input id="Client_ID" type="text" class="validate"> <label
-							for="Client_ID">Client_ID</label>
-					</div>
-					<div class="input-field col s12">
-						<input id="Bank_account_ID" type="text" class="validate"> <label
-							for="Bank_account_ID">Bank_account_ID</label>
-					</div>
+			<input type="hidden" name="id" value="${dto.id}" />
+			<div class="row">
+				<div class="input-field col s12">  
+					<input type="text" name="number" value="${dto.number}" ${empty dto.id ? '' : 'disabled'} > <label for="number">number</label>
 				</div>
-				
+			</div>
+			<div class="row">
+				<div class="input-field col s12">  
+					<input type="text" name="expiry_date" value="${dto.expiryDate}" ${empty dto.id ? '' : 'disabled'} > <label for="expiry_date">expiryDate</label>
 				</div>
-				<div class="row">
-			<div class="col s12 input-field center-align">
-				<a class="btn waves-effect waves-light red" href="list.jsp"><i class="material-icons left">List</i></a> <a class="btn waves-effect waves-light green"
-					href="#"><i class="material-icons left">Save</i></a>
+			</div>
+			<div class="row">
+				<div class="input-field col s6">
+					<input type="text" name="client_id" value="${dto.clientId}"> <label for="client_id">ClientID</label>
+				</div>
+				<div class="input-field col s6">
+					<input type="text" name="bank_account_id" value="${dto.bankAccountId}"> <label for="bankAccount_id">bankAccountID</label>
+				</div>
+				<div class="input-field col s6">
+					<input type="text" name="comment" value="${dto.comment}"> <label for="comment">comment</label>
+				</div>
 			</div>
 		</div>
-<!-- Compiled and minified JavaScript -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-	
+		<div class="row">
+			<div class="col s12 input-field center-align">
+				<a class="btn waves-effect waves-light red" href="/credit_card"><i class="material-icons left">list</i>back</a>&nbsp;
+				<button class="btn waves-effect waves-light" type="submit">
+					<i class="material-icons left">save</i>save
+				</button>
+			</div>
+		</div>
+	</form>
 </t:wrapper>

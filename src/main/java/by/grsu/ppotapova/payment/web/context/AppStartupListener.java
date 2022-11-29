@@ -24,7 +24,7 @@ public class AppStartupListener implements ServletContextListener {
 	private static final IDao<Integer, CreditCard> creditCardDao = CreditCardDaoImpl.INSTANCE;
 	private static final IDao<Integer, Transaction> transactionDao = TransactionDaoImpl.INSTANCE;
 
-	private static final String DB_NAME = "production-db";
+	private static final String DB_NAME = "payment-db";
 
 	private void initDb() throws SQLException {
 		AbstractDao.init(DB_NAME);
@@ -57,6 +57,7 @@ public class AppStartupListener implements ServletContextListener {
 		transactionEntity.setAmount(125);
 		transactionEntity.setCurrency("$");
 		transactionEntity.setType("fgdsa");
+		transactionEntity.setDate(getCurrentTime());
 		transactionEntity.setComment("fjhgfds");
 		transactionDao.insert(transactionEntity);
 		System.out.println("created: " + transactionEntity);
