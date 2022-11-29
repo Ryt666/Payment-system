@@ -11,12 +11,12 @@
 			<h1>Edit Bank account #${dto.id}</h1>
 		</c:otherwise>
 	</c:choose>
-	<form class="col s12" method="post" action="/bank_account-edit">
+	<form class="col s12" method="post" action="/bank_account">
 		<div class="row">
 			<input type="hidden" name="id" value="${dto.id}" />
 			<div class="row">
 				<div class="input-field col s12">  
-					<input type="text" name="number" value="${dto.number}" ${empty dto.id ? '' : 'disabled'} > <label for="number">number</label>
+					<input type="text" name="number" value="${dto.number}"> <label for="number">number</label>
 				</div>
 			</div>
 			<div class="row">

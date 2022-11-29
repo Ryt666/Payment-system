@@ -1,62 +1,97 @@
 package by.grsu.ppotapova.payment.web.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Timestamp;
+import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.common.base.Strings;
+
 import by.grsu.ppotapova.payment.db.dao.IDao;
 import by.grsu.ppotapova.payment.db.dao.impl.BankAccountDaoImpl;
 import by.grsu.ppotapova.payment.db.model.BankAccount;
+import by.grsu.ppotapova.payment.web.dto.BankAccountDto;
+
+
+
 
 public class BankAccountServlet extends HttpServlet {
 	private static final IDao<Integer, BankAccount> bankAccountDao = BankAccountDaoImpl.INSTANCE;
 
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		Integer bankAccountId = Integer.parseInt(req.getParameter("id")); // read request parameter
-		BankAccount bankAccountById = bankAccountDao.getById(bankAccountId); // from DB
-
-		res.setContentType("text/html");// setting the content type
-
-		PrintWriter pw = res.getWriter();// get the stream to write the data
-
-		// writing html in the stream
-		pw.println("<html><body>");
-
-		if (bankAccountById == null) {
-			pw.println("no bankAccount by id=" + bankAccountId);
+		System.out.println("doGet");
+		String viewParam = req.getParameter("view");
+		if ("edit".equals(viewParam)) {
+			handleEditView(req, res);
 		} else {
-			pw.println(bankAccountById.toString());
+			handleListView(req, res);
 		}
+	}
 
-		pw.println("</body></html>");
-		pw.close();// closing the stream
+	private void handleListView(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		List<BankAccount> bankAccounts = bankAccountDao.getAll(); // get data
+
+		List<BankAccountDto> dtos = bankAccounts.stream().map((entity) -> {
+			BankAccountDto dto = new BankAccountDto();
+			// copy necessary fields as-is
+			dto.setId(entity.getId());
+			dto.setNumber(entity.getNumber());
+			dto.setBlocked(entity.getBlocked());
+
+			
+			return dto;
+		}).collect(Collectors.toList());
+
+		req.setAttribute("list", dtos); // set data as request attribute (like "add to map") to be used later in JSP
+		req.getRequestDispatcher("bankAccount.jsp").forward(req, res); // delegate request processing to JSP
+	}
+
+	private void handleEditView(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		String bankAccountIdStr = req.getParameter("id");
+		BankAccountDto dto = new BankAccountDto();
+		if (!Strings.isNullOrEmpty(bankAccountIdStr)) {
+			// object edit
+			Integer bankAccountId = Integer.parseInt(bankAccountIdStr);
+			BankAccount entity = bankAccountDao.getById(bankAccountId);
+			dto.setId(entity.getId());
+			dto.setNumber(entity.getNumber());
+			dto.setBlocked(entity.getBlocked());
+		}
+		req.setAttribute("dto", dto);
+		req.getRequestDispatcher("bank_account-edit.jsp").forward(req, res);
 	}
 
 	@Override
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		res.setContentType("text/html");
-		PrintWriter pw = res.getWriter();// get the stream to write the data
-		pw.println("<html><body>");
-		try {
-			Integer paramNumber = Integer.parseInt(req.getParameter("number"));
-			Boolean paramBlocked = Boolean.parseBoolean(req.getParameter("meaning"));
-			BankAccount bankAccountEntity = new BankAccount();
-			bankAccountEntity.setNumber(paramNumber);
-			bankAccountEntity.setBlocked(paramBlocked);
-			bankAccountDao.insert(bankAccountEntity);
-			pw.println("Saved:" + bankAccountEntity);
+		System.out.println("doPost");
+		BankAccount bankAccount = new BankAccount();
+		String bankAccountIdStr = req.getParameter("id");
+		Integer paramNumber = Integer.parseInt(req.getParameter("number"));
 
-		} catch (Exception e) {
-			pw.println("Error:" + e.toString());
+		bankAccount.setNumber(paramNumber);
+		bankAccount.setBlocked(Boolean.parseBoolean(req.getParameter("blocked")));
+		
+		if (Strings.isNullOrEmpty(bankAccountIdStr)) {
+			// new entity
+			bankAccountDao.insert(bankAccount);
+		} else {
+			// updated entity
+			bankAccount.setId(Integer.parseInt(bankAccountIdStr));
+			bankAccountDao.update(bankAccount);
 		}
+		res.sendRedirect("/user"); // will send 302 back to client and client will execute GET /car
+	}
 
-		pw.println("</body></html>");
-		pw.close();
+	@Override
+	public void doDelete(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		System.out.println("doDelete");
+		bankAccountDao.delete(Integer.parseInt(req.getParameter("id")));
 	}
 }
