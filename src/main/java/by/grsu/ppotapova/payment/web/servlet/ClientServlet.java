@@ -17,14 +17,16 @@ import by.grsu.ppotapova.payment.db.dao.IDao;
 import by.grsu.ppotapova.payment.db.dao.impl.ClientDaoImpl;
 import by.grsu.ppotapova.payment.db.model.Client;
 import by.grsu.ppotapova.payment.web.dto.ClientDto;
+import by.grsu.ppotapova.payment.web.dto.TableStateDto;
 
-public class ClientServlet extends HttpServlet {
+public class ClientServlet extends AbstractListServlet {
 	private static final IDao<Integer, Client> clientDao = ClientDaoImpl.INSTANCE;
 	
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		System.out.println("doGet");
 		String viewParam = req.getParameter("view");
+
 		if ("edit".equals(viewParam)) {
 			handleEditView(req, res);
 		} else {
@@ -33,7 +35,15 @@ public class ClientServlet extends HttpServlet {
 	}
 
 	private void handleListView(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		List<Client> clients = clientDao.getAll(); // get data
+		int totalClient = clientDao.count(); // get count of ALL items
+
+		final TableStateDto tableStateDto = resolveTableStateDto(req, totalClient); // init TableStateDto for specific
+																					// Servlet and saves it in current
+																					// request using key
+																					// "currentPageTableState" to be
+																					// used by 'paging' component
+		 
+		List<Client> clients = clientDao.find(tableStateDto); // get data using paging and sorting params
 
 		List<ClientDto> dtos = clients.stream().map((entity) -> {
 			ClientDto dto = new ClientDto();
@@ -49,8 +59,9 @@ public class ClientServlet extends HttpServlet {
 		}).collect(Collectors.toList());
 
 		req.setAttribute("list", dtos); // set data as request attribute (like "add to map") to be used later in JSP
-		req.getRequestDispatcher("index.jsp").forward(req, res); // delegate request processing to JSP
+		req.getRequestDispatcher("client.jsp").forward(req, res); // delegate request processing to JSP
 	}
+
 
 	private void handleEditView(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		String clientIdStr = req.getParameter("id");

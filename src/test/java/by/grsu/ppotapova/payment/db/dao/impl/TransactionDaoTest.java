@@ -112,7 +112,7 @@ public class TransactionDaoTest extends AbstractTest {
 
 	private BankAccount saveBankAccount(int number) {
 		BankAccount entity = new BankAccount();
-		entity.setNumber(65234);
+		entity.setNumber("65234");
 		entity.setBlocked(true);
 		bankAccountDao.insert(entity);
 		return entity;

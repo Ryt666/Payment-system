@@ -8,7 +8,7 @@ public class TransactionDto {
 
 	private Integer bankAccountId;
 
-	private Integer bankAccountNumber;
+	private String bankAccountNumber;
 	
 	private Integer amount;
 	
@@ -37,11 +37,11 @@ public class TransactionDto {
 		this.bankAccountId = bankAccountId;
 	}
 
-	public Integer getBankAccountNumber() {
+	public String getBankAccountNumber() {
 		return bankAccountNumber;
 	}
 
-	public void setBankAccountNumber(Integer bankAccountNumber) {
+	public void setBankAccountNumber(String bankAccountNumber) {
 		this.bankAccountNumber = bankAccountNumber;
 	}
 

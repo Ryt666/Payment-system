@@ -10,6 +10,8 @@ import java.util.List;
 import by.grsu.ppotapova.payment.db.dao.AbstractDao;
 import by.grsu.ppotapova.payment.db.dao.IDao;
 import by.grsu.ppotapova.payment.db.model.Client;
+import by.grsu.ppotapova.payment.web.dto.SortDto;
+import by.grsu.ppotapova.payment.web.dto.TableStateDto;
 
 
 public class ClientDaoImpl extends AbstractDao implements IDao<Integer, Client> {
@@ -109,6 +111,43 @@ public class ClientDaoImpl extends AbstractDao implements IDao<Integer, Client> 
 		entity.setAddress(rs.getString("address"));
 		entity.setPhone(rs.getString("phone"));
 		return entity;
+	}
+
+	public List<Client> find(TableStateDto tableStateDto) {
+		List<Client> entitiesList = new ArrayList<>();
+		try (Connection c = createConnection()) {
+			StringBuilder sql = new StringBuilder("select * from client");
+
+			final SortDto sortDto = tableStateDto.getSort();
+			if (sortDto != null) {
+				sql.append(String.format(" order by %s %s", sortDto.getColumn(), resolveSortOrder(sortDto)));
+			}
+
+			sql.append(" limit " + tableStateDto.getItemsPerPage());
+			sql.append(" offset " + resolveOffset(tableStateDto));
+
+			System.out.println("searching Clients using SQL: " + sql);
+			ResultSet rs = c.createStatement().executeQuery(sql.toString());
+			while (rs.next()) {
+				Client entity = rowToEntity(rs);
+				entitiesList.add(entity);
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException("can't select Client entities", e);
+		}
+		return entitiesList;
+	}
+
+	@Override
+	public int count() {
+		try (Connection c = createConnection()) {
+			PreparedStatement pstmt = c.prepareStatement("select count(*) as c from client");
+			ResultSet rs = pstmt.executeQuery();
+			rs.next();
+			return rs.getInt("c");
+		} catch (SQLException e) {
+			throw new RuntimeException("can't get clients count", e);
+		}
 	}
 
 }

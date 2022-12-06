@@ -1,6 +1,7 @@
 package by.grsu.ppotapova.payment.web.servlet;
 
 import java.io.IOException;
+
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
@@ -16,12 +17,14 @@ import com.google.common.base.Strings;
 import by.grsu.ppotapova.payment.db.dao.IDao;
 import by.grsu.ppotapova.payment.db.dao.impl.BankAccountDaoImpl;
 import by.grsu.ppotapova.payment.db.model.BankAccount;
+import by.grsu.ppotapova.payment.db.model.Client;
 import by.grsu.ppotapova.payment.web.dto.BankAccountDto;
+import by.grsu.ppotapova.payment.web.dto.TableStateDto;
 
 
 
 
-public class BankAccountServlet extends HttpServlet {
+public class BankAccountServlet extends AbstractListServlet{
 	private static final IDao<Integer, BankAccount> bankAccountDao = BankAccountDaoImpl.INSTANCE;
 
 	@Override
@@ -36,7 +39,11 @@ public class BankAccountServlet extends HttpServlet {
 	}
 
 	private void handleListView(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		List<BankAccount> bankAccounts = bankAccountDao.getAll(); // get data
+		int totalBankAccount = bankAccountDao.count(); // get count of ALL items
+
+		final TableStateDto tableStateDto = resolveTableStateDto(req, totalBankAccount); 
+		 
+		List<BankAccount> bankAccounts = bankAccountDao.find(tableStateDto); // get data using paging and sorting params
 
 		List<BankAccountDto> dtos = bankAccounts.stream().map((entity) -> {
 			BankAccountDto dto = new BankAccountDto();
@@ -50,7 +57,7 @@ public class BankAccountServlet extends HttpServlet {
 		}).collect(Collectors.toList());
 
 		req.setAttribute("list", dtos); // set data as request attribute (like "add to map") to be used later in JSP
-		req.getRequestDispatcher("bankAccount.jsp").forward(req, res); // delegate request processing to JSP
+		req.getRequestDispatcher("bank_account.jsp").forward(req, res); // delegate request processing to JSP
 	}
 
 	private void handleEditView(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -65,6 +72,7 @@ public class BankAccountServlet extends HttpServlet {
 			dto.setBlocked(entity.getBlocked());
 		}
 		req.setAttribute("dto", dto);
+		
 		req.getRequestDispatcher("bank_account-edit.jsp").forward(req, res);
 	}
 
@@ -73,9 +81,7 @@ public class BankAccountServlet extends HttpServlet {
 		System.out.println("doPost");
 		BankAccount bankAccount = new BankAccount();
 		String bankAccountIdStr = req.getParameter("id");
-		Integer paramNumber = Integer.parseInt(req.getParameter("number"));
-
-		bankAccount.setNumber(paramNumber);
+		bankAccount.setNumber(req.getParameter("number"));
 		bankAccount.setBlocked(Boolean.parseBoolean(req.getParameter("blocked")));
 		
 		if (Strings.isNullOrEmpty(bankAccountIdStr)) {
@@ -86,7 +92,7 @@ public class BankAccountServlet extends HttpServlet {
 			bankAccount.setId(Integer.parseInt(bankAccountIdStr));
 			bankAccountDao.update(bankAccount);
 		}
-		res.sendRedirect("/user"); // will send 302 back to client and client will execute GET /car
+		res.sendRedirect("/bankAccount"); // will send 302 back to client and client will execute GET /car
 	}
 
 	@Override

@@ -2,6 +2,8 @@ package by.grsu.ppotapova.payment.web.servlet;
 
 import java.io.IOException;
 
+
+
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
@@ -22,8 +24,11 @@ import by.grsu.ppotapova.payment.db.model.BankAccount;
 import by.grsu.ppotapova.payment.db.model.Client;
 import by.grsu.ppotapova.payment.db.model.CreditCard;
 import by.grsu.ppotapova.payment.web.dto.CreditCardDto;
+import by.grsu.ppotapova.payment.web.dto.TableStateDto;
+import by.grsu.ppotapova.payment.web.dto.BankAccountDto;
+import by.grsu.ppotapova.payment.web.dto.ClientDto;
 
-public class CreditCardServlet extends HttpServlet {
+public class CreditCardServlet extends AbstractListServlet {
 	private static final IDao<Integer, CreditCard> creditCardDao = CreditCardDaoImpl.INSTANCE;
 	private static final IDao<Integer, BankAccount> bankAccountDao = BankAccountDaoImpl.INSTANCE;
 	private static final IDao<Integer, Client> clientDao = ClientDaoImpl.INSTANCE;
@@ -40,7 +45,16 @@ public class CreditCardServlet extends HttpServlet {
 	}
 
 	private void handleListView(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		List<CreditCard> creditCards = creditCardDao.getAll(); // get data
+		int totalClient = creditCardDao.count(); // get count of ALL items
+
+		final TableStateDto tableStateDto = resolveTableStateDto(req, totalClient); // init TableStateDto for specific
+																					// Servlet and saves it in current
+																					// request using key
+																					// "currentPageTableState" to be
+																					// used by 'paging' component
+		 
+		List<CreditCard> creditCards = creditCardDao.find(tableStateDto); // get data using paging and sorting params
+
 
 		List<CreditCardDto> dtos = creditCards.stream().map((entity) -> {
 			CreditCardDto dto = new CreditCardDto();
@@ -71,11 +85,36 @@ public class CreditCardServlet extends HttpServlet {
 			dto.setId(entity.getId());
 			dto.setNumber(entity.getNumber());
 			dto.setExpiryDate(entity.getExpiryDate());
+			
+			
+			dto.setClientId(entity.getClientId());
+			dto.setBankAccountId(entity.getBankAccountId());
+			
+			
+			
 		}
 		req.setAttribute("dto", dto);
-		req.getRequestDispatcher("credit_card.jsp").forward(req, res);
+		req.setAttribute("allBankAccounts", getAllBankAccountsDtos());
+		req.setAttribute("allClients", getAllClientsDtos());
+		req.getRequestDispatcher("credit_card-edit.jsp").forward(req, res);
 	}
 
+	private List<BankAccountDto> getAllBankAccountsDtos() {
+		return bankAccountDao.getAll().stream().map((entity) -> {
+			BankAccountDto dto = new BankAccountDto();
+			dto.setId(entity.getId());
+			dto.setNumber(entity.getNumber());
+			return dto;
+		}).collect(Collectors.toList());
+	}
+	private List<ClientDto> getAllClientsDtos() {
+		return clientDao.getAll().stream().map((entity) -> {
+			ClientDto dto = new ClientDto();
+			dto.setId(entity.getId());
+			dto.setName(entity.getName());
+			return dto;
+		}).collect(Collectors.toList());
+	}
 	@Override
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		System.out.println("doPost");
@@ -84,7 +123,7 @@ public class CreditCardServlet extends HttpServlet {
 		String bankAccountIdStr = req.getParameter("bankAccountId");
 		String clientIdStr = req.getParameter("clientId");
 
-		creditCard.setNumber(Integer.parseInt(req.getParameter("number")));
+		creditCard.setNumber(req.getParameter("number"));
 		creditCard.setBankAccountId(bankAccountIdStr == null ? null : Integer.parseInt(bankAccountIdStr));
 		creditCard.setClientId(clientIdStr == null ? null : Integer.parseInt(clientIdStr));
 		creditCard.setExpiryDate(new Timestamp(new Date().getTime()));
@@ -97,7 +136,7 @@ public class CreditCardServlet extends HttpServlet {
 			creditCard.setId(Integer.parseInt(creditCardIdStr));
 			creditCardDao.update(creditCard);
 		}
-		res.sendRedirect("/credit_card"); // will send 302 back to client and client will execute GET /car
+		res.sendRedirect("/creditCard"); // will send 302 back to client and client will execute GET /car
 	}
 
 	@Override

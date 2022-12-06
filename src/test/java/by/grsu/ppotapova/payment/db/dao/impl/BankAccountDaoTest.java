@@ -15,7 +15,7 @@ public class BankAccountDaoTest extends AbstractTest {
 		
 		BankAccount entity = new BankAccount();
 		
-		entity.setNumber(112345555);
+		entity.setNumber("112345555");
 		entity.setBlocked(true);
 		dao.insert(entity);
 		Assertions.assertNotNull(entity.getId());
@@ -24,11 +24,11 @@ public class BankAccountDaoTest extends AbstractTest {
 	@Test
 	public void testUpdate() {
 		BankAccount entity = new BankAccount();
-		entity.setNumber(12345);
+		entity.setNumber("12345");
 		entity.setBlocked(true);
 		dao.insert(entity);
 
-		entity.setNumber(6789);
+		entity.setNumber("6789");
 		entity.setBlocked(false);
 		dao.update(entity);
 
@@ -44,7 +44,7 @@ public class BankAccountDaoTest extends AbstractTest {
 	public void testDelete() {
 		BankAccount entity = new BankAccount();
 		entity.setId(1);
-		entity.setNumber(112345555);
+		entity.setNumber("112345555");
 		entity.setBlocked(true);
 		dao.insert(entity);
 
@@ -57,7 +57,7 @@ public class BankAccountDaoTest extends AbstractTest {
 	public void testGetById() {
 		BankAccount entity = new BankAccount();
 		entity.setId(1);
-		entity.setNumber(112345555);
+		entity.setNumber("112345555");
 		entity.setBlocked(true);
 		dao.insert(entity);
 
@@ -74,7 +74,7 @@ public class BankAccountDaoTest extends AbstractTest {
 		for (int i = 1; i <= expectedCount; i = i + 1) {
 			BankAccount entity = new BankAccount();
 			entity.setId( 1 + i); // generate some random meaningless name as it is just a test (the data can be unreal)
-			entity.setNumber(112345555);
+			entity.setNumber("112345555");
 			entity.setBlocked(true);
 			dao.insert(entity);
 		}

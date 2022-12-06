@@ -2,9 +2,9 @@ package by.grsu.ppotapova.payment.db.model;
 
 public class BankAccount {
 	
-	private int id;
+	private Integer id;
 	
-	private int number;
+	private String number;
 	
 	private boolean blocked;
 	@Override
@@ -13,16 +13,16 @@ public class BankAccount {
 	}
 
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
-	public int getNumber() {
+	public String getNumber() {
 		return number;
 	}
-	public void setNumber(int number) {
+	public void setNumber(String number) {
 		this.number = number;
 	}
 	public boolean getBlocked() {

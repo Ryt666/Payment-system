@@ -1,6 +1,7 @@
 package by.grsu.ppotapova.payment.db.dao.impl;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,7 +10,10 @@ import java.util.List;
 
 import by.grsu.ppotapova.payment.db.dao.AbstractDao;
 import by.grsu.ppotapova.payment.db.dao.IDao;
+import by.grsu.ppotapova.payment.db.model.Client;
 import by.grsu.ppotapova.payment.db.model.Transaction;
+import by.grsu.ppotapova.payment.web.dto.SortDto;
+import by.grsu.ppotapova.payment.web.dto.TableStateDto;
 
 public class TransactionDaoImpl extends AbstractDao implements IDao<Integer, Transaction> {
 	public static final TransactionDaoImpl INSTANCE = new TransactionDaoImpl();
@@ -49,6 +53,7 @@ public class TransactionDaoImpl extends AbstractDao implements IDao<Integer, Tra
 			pstmt.setString(4, entity.getType());
 			pstmt.setTimestamp(5, entity.getDate());
 			pstmt.setString(6,entity.getComment());
+			pstmt.setInt(7,entity.getId());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new RuntimeException("can't update Transaction entity", e);
@@ -112,6 +117,43 @@ public class TransactionDaoImpl extends AbstractDao implements IDao<Integer, Tra
 		entity.setDate(rs.getTimestamp("_data"));
 		entity.setComment(rs.getString("comment"));
 		return entity;
+	}
+	
+	public List<Transaction> find(TableStateDto tableStateDto) {
+		List<Transaction> entitiesList = new ArrayList<>();
+		try (Connection c = createConnection()) {
+			StringBuilder sql = new StringBuilder("select * from _transaction");
+
+			final SortDto sortDto = tableStateDto.getSort();
+			if (sortDto != null) {
+				sql.append(String.format(" order by %s %s", sortDto.getColumn(), resolveSortOrder(sortDto)));
+			}
+
+			sql.append(" limit " + tableStateDto.getItemsPerPage());
+			sql.append(" offset " + resolveOffset(tableStateDto));
+
+			System.out.println("searching Clients using SQL: " + sql);
+			ResultSet rs = c.createStatement().executeQuery(sql.toString());
+			while (rs.next()) {
+				Transaction entity = rowToEntity(rs);
+				entitiesList.add(entity);
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException("can't select Transaction entities", e);
+		}
+		return entitiesList;
+	}
+
+	@Override
+	public int count() {
+		try (Connection c = createConnection()) {
+			PreparedStatement pstmt = c.prepareStatement("select count(*) as c from _transaction");
+			ResultSet rs = pstmt.executeQuery();
+			rs.next();
+			return rs.getInt("c");
+		} catch (SQLException e) {
+			throw new RuntimeException("can't get _transactions count", e);
+		}
 	}
 
 }

@@ -1,7 +1,7 @@
 package by.grsu.ppotapova.payment.db.model;
 
 public class Client {
-	private int id;
+	private Integer id;
 	private String name;
 	private String surname;
 	private String address;
@@ -12,10 +12,10 @@ public class Client {
 		return "client [ id: " + id +"; name: "+ name + "; surname: "+ surname +";phone:"+ phone +";address: "+ address +"]";
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getName() {

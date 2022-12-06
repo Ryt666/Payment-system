@@ -20,14 +20,14 @@ public class Main {
 		System.out.println(c1.toString());
 		CreditCard cc1=new CreditCard();
 		cc1.setId(0);
-		cc1.setNumber(458725488);
+		cc1.setNumber("458725488");
 		cc1.setExpiryDate(null);
 		cc1.setBankAccountId(1);
 		cc1.setClientId(1);
 		System.out.println(cc1.toString());
 		BankAccount ba1 = new BankAccount();
 		ba1.setId(1);
-		ba1.setNumber(112345555);
+		ba1.setNumber("11qwe2345555");
 		ba1.setBlocked(true);
 		System.out.println(ba1.toString());
 		Transaction tr1 = new Transaction();

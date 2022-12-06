@@ -7,7 +7,8 @@
 
 <!-- Compiled and minified CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<link href="fonts/fons.txt" rel="stylesheet"> 
 
 <script src="js/helpers.js"></script>
 </head>
@@ -18,10 +19,11 @@
 	<div class="nav-wrapper container">
 		<a id="logo-container" href="#" class="brand-logo">Logo</a>
 		<ul class="right hide-on-med-and-down">
-			<li><a href="index.jsp">Client</a></li>
-			<li><a href="credit_card.jsp">Credit Card</a></li>
-			<li><a href="bank_account.jsp">Bank Account</a></li>
-			<li><a href="transaction.jsp">Transaction</a></li>
+			<li><a href="client">Client</a></li>
+			<li><a href="creditCard">Credit Card</a></li>
+			<li><a href="bankAccount">Bank Account</a></li>
+			<li><a href="transaction">Transaction</a></li>
+			<li class="active"><a onclick="sendHTTPDelete('/login')">Logout</a></li>
 		</ul>
 	</div>
 </nav>    

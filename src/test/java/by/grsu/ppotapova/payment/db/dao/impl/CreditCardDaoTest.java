@@ -20,7 +20,7 @@ public class CreditCardDaoTest extends AbstractTest {
 		CreditCard entity = new CreditCard();
 		entity.setBankAccountId(saveBankAccount(1).getId());
 		entity.setClientId(saveClient("Polina").getId());
-		entity.setNumber(12345);
+		entity.setNumber("12345");
 		entity.setExpiryDate(getCurrentTime());
 		creditCardDao.insert(entity);
 		Assertions.assertNotNull(entity.getId());
@@ -32,17 +32,15 @@ public class CreditCardDaoTest extends AbstractTest {
 		CreditCard entity = new CreditCard();
 		entity.setBankAccountId(saveBankAccount(1).getId());
 		entity.setClientId(saveClient("Polina").getId());
-		entity.setNumber(12345);
+		entity.setNumber("12345");
 		entity.setExpiryDate(getCurrentTime());
 		creditCardDao.insert(entity);
-
-		Integer newNumber = 54321;
 		
-		entity.setNumber(newNumber);
+		entity.setNumber("32435");
 		creditCardDao.update(entity);
 
 		CreditCard updatedEntity = creditCardDao.getById(entity.getId());
-		Assertions.assertEquals(newNumber, updatedEntity.getNumber());
+		Assertions.assertEquals("32435", updatedEntity.getNumber());
 	}
 
 	@Test
@@ -50,7 +48,7 @@ public class CreditCardDaoTest extends AbstractTest {
 		CreditCard entity = new CreditCard();
 		entity.setBankAccountId(saveBankAccount(1).getId());
 		entity.setClientId(saveClient("Polina").getId());
-		entity.setNumber(12345);
+		entity.setNumber("12345");
 		entity.setExpiryDate(getCurrentTime());
 		creditCardDao.insert(entity);
 
@@ -64,7 +62,7 @@ public class CreditCardDaoTest extends AbstractTest {
 		CreditCard entity = new CreditCard();
 		entity.setBankAccountId(saveBankAccount(1).getId());
 		entity.setClientId(saveClient("Polina").getId());
-		entity.setNumber(12345);
+		entity.setNumber("12345");
 		entity.setExpiryDate(getCurrentTime());
 		creditCardDao.insert(entity);
 
@@ -84,7 +82,7 @@ public class CreditCardDaoTest extends AbstractTest {
 			CreditCard entity = new CreditCard();
 			entity.setBankAccountId(saveBankAccount(1 + i).getId());
 			entity.setClientId(saveClient("Polina"+ i).getId());
-			entity.setNumber(12345);
+			entity.setNumber("12345");
 			entity.setExpiryDate(getCurrentTime());
 			creditCardDao.insert(entity);
 		}
@@ -94,7 +92,7 @@ public class CreditCardDaoTest extends AbstractTest {
 
 	private BankAccount saveBankAccount(int number) {
 		BankAccount entity = new BankAccount();
-		entity.setNumber(65234);
+		entity.setNumber("65234");
 		entity.setBlocked(true);
 		bankAccountDao.insert(entity);
 		return entity;

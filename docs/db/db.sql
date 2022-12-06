@@ -7,7 +7,7 @@ CREATE TABLE client (
 );
 
 CREATE TABLE credit_card (
-	id integer PRIMARY KEY AUTOINCREMENT,
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
 	number VARCHAR NOT NULL,
 	expiry_date date NOT NULL,
 	client_id INTEGER NOT NULL REFERENCES client(id),
@@ -15,13 +15,13 @@ CREATE TABLE credit_card (
 );
 
 CREATE TABLE bank_account (
-	id integer PRIMARY KEY AUTOINCREMENT,
-	number integer NOT NULL,
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	number VARCHAR NOT NULL,
 	blocked boolean NOT NULL
 );
 
 CREATE TABLE _transaction (
-	id integer PRIMARY KEY AUTOINCREMENT,
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
 	bank_account_id INTEGER NOT NULL REFERENCES bank_account(id),
 	amount INTEGER NOT NULL,
 	currency VARCHAR NOT NULL,

@@ -39,7 +39,7 @@ public class AppStartupListener implements ServletContextListener {
 
 	private void loadInitialData() {
 		BankAccount bankAccountEntity = new BankAccount();
-		bankAccountEntity.setNumber(125);
+		bankAccountEntity.setNumber("125");
 		bankAccountEntity.setBlocked(false);
 		bankAccountDao.insert(bankAccountEntity);
 		System.out.println("created: " + bankAccountEntity);
@@ -63,7 +63,7 @@ public class AppStartupListener implements ServletContextListener {
 		System.out.println("created: " + transactionEntity);
 
 		CreditCard creditCardEntity = new CreditCard();
-		creditCardEntity.setNumber(5478);
+		creditCardEntity.setNumber("5478");
 		creditCardEntity.setExpiryDate(getCurrentTime());
 		creditCardEntity.setClientId(clientEntity.getId());
 		creditCardEntity.setBankAccountId(bankAccountEntity.getId());
@@ -83,7 +83,7 @@ public class AppStartupListener implements ServletContextListener {
 			initDb();
 		} catch (SQLException e) {
 			throw new RuntimeException("can't init DB", e);
-		}
+		}	
 	}
 
 	@Override

@@ -4,7 +4,7 @@ public class BankAccountDto {
 	
 	private Integer id;
 	
-	private Integer number;
+	private String number;
 	
 	private boolean blocked;
 	@Override
@@ -19,10 +19,10 @@ public class BankAccountDto {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Integer getNumber() {
+	public String getNumber() {
 		return number;
 	}
-	public void setNumber(Integer number) {
+	public void setNumber(String number) {
 		this.number = number;
 	}
 	public boolean getBlocked() {

@@ -7,26 +7,26 @@ import java.util.Date;
 
 public class CreditCard {
 	
-	private int id;
+	private Integer id;
 	
-	private Integer number;
+	private String number;
 	
 	private Timestamp expiryDate;
 	
-	private int clientId;
+	private Integer clientId;
 	
-	private int bankAccountId;
+	private Integer bankAccountId;
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Integer getNumber() {
+	public String getNumber() {
 		return number;
 	}
-	public void setNumber(Integer number) {
+	public void setNumber(String number) {
 		this.number = number;
 	}
 	public Timestamp getExpiryDate() {
@@ -35,16 +35,16 @@ public class CreditCard {
 	public void setExpiryDate(Timestamp expiryDate) {
 		this.expiryDate = expiryDate;
 	}
-	public int getClientId() {
+	public Integer getClientId() {
 		return clientId;
 	}
-	public void setClientId(int clientId) {
+	public void setClientId(Integer clientId) {
 		this.clientId = clientId;
 	}
-	public int getBankAccountId() {
+	public Integer getBankAccountId() {
 		return bankAccountId;
 	}
-	public void setBankAccountId(int bankAccountId) {
+	public void setBankAccountId(Integer bankAccountId) {
 		this.bankAccountId = bankAccountId;
 	}
 	@Override

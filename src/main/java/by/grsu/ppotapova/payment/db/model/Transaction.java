@@ -22,14 +22,13 @@ public class Transaction {
 		return "transaction [ id: " + id  +"bank_account:"+bankAccountId +"; amount: "+ amount + "; currency: "+ currency + "type: " + type + "date: " + date +"comment: " + comment + "]";
 	}
 
-		public Integer getId() {
+	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	
 	public Integer getBankAccountId() {
 		return bankAccountId;
 	}
