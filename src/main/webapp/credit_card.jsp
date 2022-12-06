@@ -20,9 +20,9 @@
 			<tr>
 				<th><mytaglib:sort-link pageUrl="${pageUrl}" column="id">DB ID</mytaglib:sort-link></th>
 				<th><mytaglib:sort-link pageUrl="${pageUrl}" column="number">number</mytaglib:sort-link></th>
-				<th><mytaglib:sort-link pageUrl="${pageUrl}" column="expiry date">expiry date</mytaglib:sort-link></th>
-				<th><mytaglib:sort-link pageUrl="${pageUrl}" column="bank account number">bank account number</mytaglib:sort-link></th>
-				<th><mytaglib:sort-link pageUrl="${pageUrl}" column="client name">client name</mytaglib:sort-link></th>
+				<th><mytaglib:sort-link pageUrl="${pageUrl}" column="expiry_date">expiry date</mytaglib:sort-link></th>
+				<th><mytaglib:sort-link pageUrl="${pageUrl}" column="bank_account_id">bank account number</mytaglib:sort-link></th>
+				<th><mytaglib:sort-link pageUrl="${pageUrl}" column="client_id">client name</mytaglib:sort-link></th>
 				
 				<th>actions</th>
 			</tr>

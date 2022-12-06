@@ -23,7 +23,7 @@
 				<th><mytaglib:sort-link pageUrl="${pageUrl}" column="amount">amount</mytaglib:sort-link></th>
 				<th><mytaglib:sort-link pageUrl="${pageUrl}" column="currency">currency</mytaglib:sort-link></th>
 				<th><mytaglib:sort-link pageUrl="${pageUrl}" column="type">type</mytaglib:sort-link></th>
-				<th><mytaglib:sort-link pageUrl="${pageUrl}" column="Date">date</mytaglib:sort-link></th>
+				<th><mytaglib:sort-link pageUrl="${pageUrl}" column="_data">date</mytaglib:sort-link></th>
 				<th><mytaglib:sort-link pageUrl="${pageUrl}" column="Comment">comment</mytaglib:sort-link></th>
 				<th>actions</th>
 			</tr>
