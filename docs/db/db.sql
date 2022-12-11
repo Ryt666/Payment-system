@@ -30,7 +30,7 @@ CREATE TABLE _transaction (
 	comment VARCHAR NOT NULL
 );
 
-
+_
 
 
 

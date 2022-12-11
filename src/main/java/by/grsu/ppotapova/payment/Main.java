@@ -1,5 +1,6 @@
 package by.grsu.ppotapova.payment;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 import by.grsu.ppotapova.payment.db.model.BankAccount;
@@ -36,7 +37,7 @@ public class Main {
 		tr1.setAmount(12);
 		tr1.setCurrency("jjdj");
 		tr1.setType("fv");
-		tr1.setDate(new Timestamp(Util.getDateFromString("23/11/2022").getTime()));
+		tr1.setDate(null);
 		tr1.setComment("sadfgh");
 		System.out.println(tr1.toString());
 

@@ -1,5 +1,7 @@
 package by.grsu.ppotapova.payment.web.dto;
 
+import java.sql.Date;
+
 import java.sql.Timestamp;
 
 public class TransactionDto {

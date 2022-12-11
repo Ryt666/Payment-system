@@ -19,7 +19,7 @@
 		<thead>
 			<tr>
 				<th><mytaglib:sort-link pageUrl="${pageUrl}" column="id">DB ID</mytaglib:sort-link></th>
-				<th><mytaglib:sort-link pageUrl="${pageUrl}" column="bankAccountNumber">bank account number</mytaglib:sort-link></th>
+				<th><mytaglib:sort-link pageUrl="${pageUrl}" column="bank_account_number">bank account number</mytaglib:sort-link></th>
 				<th><mytaglib:sort-link pageUrl="${pageUrl}" column="amount">amount</mytaglib:sort-link></th>
 				<th><mytaglib:sort-link pageUrl="${pageUrl}" column="currency">currency</mytaglib:sort-link></th>
 				<th><mytaglib:sort-link pageUrl="${pageUrl}" column="type">type</mytaglib:sort-link></th>

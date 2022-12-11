@@ -2,6 +2,7 @@ package by.grsu.ppotapova.payment.db.dao.impl;
 
 import java.sql.Connection;
 
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,7 +11,6 @@ import java.util.List;
 
 import by.grsu.ppotapova.payment.db.dao.AbstractDao;
 import by.grsu.ppotapova.payment.db.dao.IDao;
-import by.grsu.ppotapova.payment.db.model.Client;
 import by.grsu.ppotapova.payment.db.model.Transaction;
 import by.grsu.ppotapova.payment.web.dto.SortDto;
 import by.grsu.ppotapova.payment.web.dto.TableStateDto;

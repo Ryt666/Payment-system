@@ -1,6 +1,7 @@
 package by.grsu.ppotapova.payment.db.model;
 
 import java.sql.Timestamp;
+import java.sql.Date;
 public class Transaction {
 	
 	private Integer id;
@@ -70,5 +71,10 @@ public class Transaction {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
+
 	
-}
+
+	
+		
+	}
+

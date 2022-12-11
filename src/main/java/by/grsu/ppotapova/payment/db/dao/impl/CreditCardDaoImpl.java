@@ -1,6 +1,7 @@
 package by.grsu.ppotapova.payment.db.dao.impl;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -27,7 +28,7 @@ public class CreditCardDaoImpl extends AbstractDao implements IDao<Integer, Cred
 			PreparedStatement pstmt = c
 					.prepareStatement("insert into credit_card(number,expiry_date,client_id,bank_account_id) values(?,?,?,?)");
 			pstmt.setString(1, entity.getNumber());
-			pstmt.setTimestamp(2, entity.getExpiryDate());
+			pstmt.setTimestamp(2,entity.getExpiryDate());
 			pstmt.setInt(3, entity.getClientId());
 			pstmt.setInt(4, entity.getBankAccountId());
 			pstmt.executeUpdate();
@@ -43,7 +44,7 @@ public class CreditCardDaoImpl extends AbstractDao implements IDao<Integer, Cred
 		try (Connection c = createConnection()) {
 			PreparedStatement pstmt = c.prepareStatement("update credit_card set number=?, expiry_date=?, client_id=?, bank_account_id=? where id=?");
 			pstmt.setString(1, entity.getNumber());
-			pstmt.setTimestamp(2, entity.getExpiryDate());
+			pstmt.setTimestamp(2,entity.getExpiryDate());
 			pstmt.setInt(3, entity.getClientId());
 			pstmt.setInt(4, entity.getBankAccountId());
 			pstmt.setInt(5, entity.getId());
