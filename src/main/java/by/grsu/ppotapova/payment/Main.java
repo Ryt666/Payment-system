@@ -22,7 +22,7 @@ public class Main {
 		CreditCard cc1=new CreditCard();
 		cc1.setId(0);
 		cc1.setNumber("458725488");
-		cc1.setExpiryDate(null);
+		cc1.setExpiryDate(new Timestamp(new Date(0).getTime()));
 		cc1.setBankAccountId(1);
 		cc1.setClientId(1);
 		System.out.println(cc1.toString());
@@ -37,7 +37,7 @@ public class Main {
 		tr1.setAmount(12);
 		tr1.setCurrency("jjdj");
 		tr1.setType("fv");
-		tr1.setDate(null);
+		tr1.setDate(new Timestamp(new Date(0).getTime()));
 		tr1.setComment("sadfgh");
 		System.out.println(tr1.toString());
 
